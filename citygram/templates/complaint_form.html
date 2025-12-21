@@ -1,0 +1,130 @@
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Complaint | CityGram</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+
+    body {
+      margin: 0;
+      padding: 40px 15px;
+      background: #eef1f6;
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .form-container {
+      width: 100%;
+      max-width: 550px;
+      background: white;
+      padding: 30px 35px;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 22px;
+      color: #222;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 12px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d0d0d0;
+      border-radius: 8px;
+      margin-top: 6px;
+      font-size: 14px;
+    }
+
+    textarea {
+      height: 90px;
+      resize: vertical;
+    }
+
+
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      border: none;      
+      border-bottom: 2px solid #007bff; 
+      background: #f7f9fc;
+      border-radius: 4px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    select:focus {
+      border-bottom: 2px solid #0048b3;
+      background: #eef5ff;
+    }
+
+    input[type="file"] {
+      margin-top: 10px;
+      display: block;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 12px;
+      background: #0066ff;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.25s;
+    }
+
+    button:hover {
+      background: #004ecc;
+    }
+
+
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 20px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="form-container">
+    <h2>Report a New Issue</h2>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <label>Upload Photos or Videos (Multiple)</label>
+      <input type="file" name="attachments" multiple>
+
+      <button type="submit">Submit Complaint</button>
+    </form>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+{% load static %}
+<html>
+<head>
+    <title>My Complaints | CityGram</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #f4f7fb;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 25px;
+        }
+
+        .complaint-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .complaint-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .complaint-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .Pending { background: #777; }
+        .In\ Progress { background: #0d479e; }
+        .Resolved { background: #28a745; }
+        .Delayed { background: #d9534f; }
+
+        .attachments-box {
+            margin-top: 15px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .thumb {
+            width: 130px;
+            height: 130px;
+            border: none;
+            background: #eee;
+            border-radius: 10px;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .thumb img, .thumb video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: rgba(0,0,0,0.6);
+            padding: 3px 6px;
+            color: white;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+
+  
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal video, .modal img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .thumb { width: 100px; height: 100px; }
+        }
+        .badge.in-progress { background: #ff9900; } 
+    </style>
+</head>
+
+<body>
+
+<h2>Your Complaints</h2>
+
+{% for c in complaints %}
+    <div class="complaint-card">
+
+        <div class="complaint-header">
+            <div class="complaint-title">{{ c.title }}</div>
+            <div class="badge {{ c.status|slugify }}">{{ c.status }}</div>
+        </div>
+
+        <p><strong>Category:</strong> {{ c.category }}</p>
+        <p><strong>Address:</strong> {{ c.address }}</p>
+        <p><strong>Priority:</strong> {{ c.priority }}</p>
+        <p><strong>Description:</strong> {{ c.description }}</p>
+
+        {% if c.attachments.all %}
+        <div class="attachments-box">
+
+            {% for a in c.attachments.all %}
+                {% with url=a.file.url %}
+                    <button class="thumb"
+                        data-url="{{ url }}"
+                        data-type="{% if '.mp4' in url|lower or '.mov' in url|lower or '.avi' in url|lower %}video{% else %}image{% endif %}"
+                    >
+
+                        {% if '.mp4' in url|lower or '.mov' in url|lower or '.avi' in url|lower %}
+                            <video src="{{ url }}" muted playsinline></video>
+                            <span class="play-badge">▶︎ Video</span>
+                        {% else %}
+                            <img src="{{ url }}" alt="attachment">
+                        {% endif %}
+
+                    </button>
+                {% endwith %}
+            {% endfor %}
+
+        </div>
+        {% endif %}
+
+    </div>
+{% empty %}
+    <p style="text-align:center;color:#777;">No complaints submitted yet.</p>
+{% endfor %}
+
+
+
+<div id="previewModal" class="modal">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div id="modalBody"></div>
+</div>
+
+<script>
+function openModal(url, type) {
+    let modal = document.getElementById("previewModal");
+    let box = document.getElementById("modalBody");
+
+    if (type === "image") {
+        box.innerHTML = `<img src="${url}" class="modal-content">`;
+    } else {
+        box.innerHTML = `<video src="${url}" controls autoplay class="modal-content"></video>`;
+    }
+
+    modal.style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("previewModal").style.display = "none";
+    document.getElementById("modalBody").innerHTML = "";
+}
+
+document.querySelectorAll(".thumb").forEach(btn => {
+    btn.addEventListener("click", () => {
+        let url = btn.dataset.url;
+        let type = btn.dataset.type;
+        openModal(url, type);
+    });
+});
+</script>
+
+</body>
+</html>

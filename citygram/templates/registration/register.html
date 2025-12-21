@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register CiviConnect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+    font-size: 16px;
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+}
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background-color: #eef3f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .auth-box, .form-box {
+    max-width: 400px;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+
+    .auth-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .auth-box {
+      background: #ffffff;
+      padding: 40px 50px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      width: 420px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #003366;
+      margin-bottom: 25px;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #333;
+      display: block;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+    }
+
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 3px rgba(0, 123, 255, 0.4);
+    }
+
+    .error {
+      color: #cc0000;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    button {
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #004d99;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-box">
+      <h2>Create Account</h2>
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+              <div class="error">{{ field.errors|striptags }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+        <button type="submit">Register</button>
+      </form>
+
+      <p>Already have an account ? <a href="/login/">Login here</a></p>
+    </div>
+  </div>
+</body>
+</html>

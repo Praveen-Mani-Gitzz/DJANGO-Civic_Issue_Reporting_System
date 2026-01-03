@@ -1,18 +1,34 @@
-Project Direct Link - https://django-civic-issue-reporting-system.onrender.com
 
-🏙️ CiviConnect – Civic Issue Reporting System
+# 🏙️ CiviConnect – Civic Issue Reporting System
 
-CiviConnect is a web-based civic issue reporting platform built using Django.
+🔗 **Live Project:**
+[https://django-civic-issue-reporting-system.onrender.com](https://django-civic-issue-reporting-system.onrender.com)
+
+---
+
+## 📌 Project Overview
+
+**CiviConnect** is a web-based civic issue reporting platform built using **Django**.
 It enables citizens to report local public issues and allows municipal officers (admins) to track, manage, and resolve those issues efficiently through a centralized system.
 
 The project focuses on **transparency, accountability, and structured communication** between the public and authorities.
 
-📌 Project Objective
+---
+
+## 🎯 Project Objective
 
 The main objective of CiviConnect is to simplify the process of reporting civic problems and ensure users can track the progress of their complaints.
-Instead of manual follow-ups or unstructured communication, this system provides a digital workflow with status updates, attachments, and admin responses.
 
-👤 User Capabilities
+Instead of manual follow-ups or unstructured communication, this system provides a digital workflow with:
+
+* Complaint status tracking
+* File attachments
+* Admin replies
+* Centralized complaint management
+
+---
+
+## 👤 User Capabilities
 
 A registered user can:
 
@@ -36,12 +52,14 @@ A registered user can:
 * View replies from municipal officers
 * See admin-uploaded images/videos showing work progress
 
-Unauthorized users:
+### Unauthorized Users
 
 * Can only view the home page
 * Must register or log in to submit or view complaints
 
-🛠️ Admin / Officer Capabilities
+---
+
+## 🛠️ Admin / Officer Capabilities
 
 Admins (municipal officers) can:
 
@@ -59,7 +77,9 @@ Admins (municipal officers) can:
 * Review user-uploaded attachments directly in the admin panel
 * Maintain a complete history of complaint communication
 
-🧩 Major Features Implemented
+---
+
+## 🧩 Major Features Implemented
 
 * User Authentication & Authorization
 * Role-based access (User vs Admin)
@@ -72,38 +92,42 @@ Admins (municipal officers) can:
 * Media handling for images and videos
 * Django Admin customization
 
-🏗️ Project Architecture
+---
 
-Frontend (UI)
+## 🏗️ Project Architecture
+
+### Frontend (UI)
 
 * HTML templates using Django Template Language (DTL)
 * Inline CSS for clean and consistent UI
 * Responsive layout for desktop and mobile
 
-Backend
+### Backend
 
 * Django framework
 * Function-based views
 * Django ORM for database operations
 
-Database
+### Database
 
 * SQLite (default Django database)
 * Used for development and testing
 * Can be replaced with MySQL or PostgreSQL for production
 
-Media Handling
+### Media Handling
 
 * `FileField` for storing images and videos
 * Media served via Django settings in development
 
-Admin Panel
+### Admin Panel
 
 * Django Admin interface
 * Inline models for attachments and replies
 * Custom list views and filters
 
-🧪 Technologies Used
+---
+
+## 🧪 Technologies Used
 
 * **Python**
 * **Django**
@@ -113,7 +137,9 @@ Admin Panel
 * **Django ORM**
 * **Django Admin**
 
-📂 Project Structure (Simplified)
+---
+
+## 📂 Project Structure (Simplified)
 
 ```
 CiviConnect/
@@ -145,7 +171,9 @@ CiviConnect/
 └── manage.py
 ```
 
-🔐 Access Control Logic
+---
+
+## 🔐 Access Control Logic
 
 * Home page is public
 * Registration and Login required to:
@@ -157,7 +185,9 @@ CiviConnect/
   * `@staff_member_required`
 * User-specific complaints filtered using logged-in user context
 
-🚀 Future Enhancements
+---
+
+## 🚀 Future Enhancements
 
 * Email or SMS notifications on status change
 * REST API integration
@@ -167,10 +197,10 @@ CiviConnect/
 * Deployment with MySQL/PostgreSQL
 * Cloud storage for media files
 
-📄 Conclusion
+---
 
-CiviConnect demonstrates a complete Django-based project with real-world use cases.
-It showcases backend logic, authentication, file handling, admin control, and user interaction in a structured and scalable manner.
-* Live project explanation script
+## 📄 Conclusion
 
-Just tell.
+CiviConnect demonstrates a complete **Django-based real-world application**.
+It showcases backend logic, authentication, file handling, admin control, and structured user interaction in a scalable and maintainable manner.
+
